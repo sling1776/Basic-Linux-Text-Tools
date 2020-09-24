@@ -15,7 +15,6 @@ if len(sys.argv) < 2:
     usage()
     sys.exit(1)
 else:
-    print("TODO: determine which tool the user has invoked")
     tool = sys.argv[1]
     if len(sys.argv) < 3:
         usage("Too few arguments", tool)
@@ -31,5 +30,12 @@ else:
         tail(sys.argv[2:])
     elif tool == "wc":
         wc(sys.argv[2:])
+    elif tool == "grep":
+        grep(sys.argv[2:])
+    elif tool == "sort":
+        sort(sys.argv[2:])
+    elif tool == "paste":
+        paste(sys.argv[2:])
+    elif tool == "cut":
+        cut(sys.argv[2:])
 
-    print("TODO: call on that tool, forwarding any remaining arguments to it")

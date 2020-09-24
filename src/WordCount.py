@@ -21,5 +21,6 @@ def wc(files):
         tChar += characterCount
         tWord += wordCount
         tLine += lineCount
+        f.close()
     if len(files) > 1:
         print(tLine, "\t", tWord, "\t", tChar, "\t", "total")
