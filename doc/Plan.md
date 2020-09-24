@@ -4,45 +4,91 @@
 
 # 0.  From Problem Analysis to Data Definitions
 
-**Problem Analysis is the process of understanding the problem the software
-will address and to document in detail what the software system needs to do.
-In the real world this phase demands close interaction between developers and
-the client.  Ideally, end-users of the system are interviewed for their input.
 
-In this course you will receive detailed requirements in the form of the
-assignment description.  I stand-in for the client and end-users when you have
-questions concerning their needs and desires.
+I need to create a program that will run similar to a command line prompt in linux.
+A lot of the same things that are used in the linux terminal will be created in 
+my program. These are the cat/tac, cut/paste, grep, head/tail, sort, and wc commands.
 
-In this phase of the design process you should use [The Feynman
-Technique](https://www.youtube.com/watch?v=tkm0TNFzIeg) to ensure that you
-understand what is being asked of you. 
+The cat/tac argument will print a concatenation of two files given after the argument.
+"tac" is the reversal of cat.
 
-The output of this phase of the development process is a restatement of the
-requirements in your own words.  Putting new problems into your own words will
-help you identify your "Known knowns" and your "known unknowns".
+cut/paste will print the columns of the file. Cut will take a CSV file and print the column 
+desired. If more than one column is entered then it will print them side by side separated by a comma.
+Paste will take text files and print them side by side separated by a comma. 
 
-As part of your restatement of the problem identify information that must be
-represented and decide how to represent in the chosen programming language.
+grep will find all the lines that have a certain phrase or word in them. -v included in the argument will 
+print all that don't have that phrase in them.
 
-Formulate data definitions and illustrate them with examples.**
+head/tail will print the first "x" lines or last "x" lines of a file respectively. default is 10 lines. tail does not
+reverse the order of the lines. They remain in the same order they were in in the file.
+
+sort will sort the contents of the file alphabetically. This means that numbers are treated 
+as strings through this function. 
+
+wc will count the number of words in the file. It prints the lines, words and characters
+used in the file.
+
+
 
 
 # 1.  System Analysis
 
-**Analyze the flow of data throughout the program.  Does the program get input
-from the user?  If so, does it come from interactive prompts or from
-command-line arguments?  Is data incorporated from a file on the disk, from a
-database or from the internet?
+input will come from the command line. No interactive prompts. It will then read files
+given from the command line. 
 
-How is output given?  On the screen in the form of text or graphics?  Are
-output files created, and what form do they take?
+output will be printed to the screen. 
 
-Identify the non-trivial formulas you need to create.  If there aren't any then
-state "no formulas" in this section.
+No Formulas
 
-State what kind of data each desired function consumes and produces.  Formulate
-a concise descripiton of what the function computes.  Define a stub that lives
-up to the signature.**
+cat
+input:list of strings (["data/let3", "data/num2"])
+output: print a string: file contents by line with second file following it.
+concatenate files and print on the standard output
+
+tac
+input:list of strings (["data/let3", "data/num2"])
+output: print a string: file contents of first by line backwards with second file backwards following it.
+concatenate and print files in reverse
+
+cut
+input: list of strings: ["-f", "2", "data/people.csv"]
+output:the desired column (2) printed on screen
+remove and print sections from each line of files
+
+paste:
+input:list of strings (["data/let3", "data/num2"])
+output:similar to cat, but the files share the same line
+merge lines of files
+
+grep
+input: list of strings: ["-v", "a", "data/ages8", "data/colors8", "data/let3"]
+output: print all the lines of the files that have/don't have the phrase in them.
+print lines that match patterns
+
+head
+input: list of strings: ["-n", "3", "data/ages8", "data/names8", "data/words200"]
+output: header of file(if more than one) and number of lines from beginning (3)
+print first part of file
+
+tail
+input: list of strings: ["-n", "3", "data/ages8", "data/names8", "data/words200"]
+output: header of file(if more than one) and number of lines (3) towards the end
+print last part of file
+
+sort
+input: list of strings: ["data/words5", "data/names8"]
+output: an alphabetical list of all lines of both files
+sort lines of text files
+
+usage
+input: error message or tool error
+output: error message 
+Provide a unified error reporting interface
+
+wc
+input: list of Strings: ["data/let3", "data/random20", "data/words200", "data/dup5"]
+output: one line per file of lines, words, then characters followed by name of file.
+print newline, word, and byte counts for each file
 
 
 # 2.  Functional Examples
@@ -66,6 +112,9 @@ mistakes as you go.
 This phase involves the use of many levels of abstraction to decompose the
 problem into manageable components, and design strategies for implementing each
 component.  Components may be functions, modules or classes.**
+
+cat(args)
+ 
 
 
 # 3.  Function Template
