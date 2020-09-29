@@ -4,38 +4,40 @@ import sys
 def cut(args):
     """remove sections from each line of files"""
     columnsWantedNums = []
+ # check for the -f character #
     if args[0] == "-f":
         args.pop(0)
-        columnsWanted = args[0].split(",")
+        columnsWanted = args[0].split(",")      # get the string of numbers
         for item in range(len(columnsWanted)):
             if not columnsWanted[item].isdigit():
                 usage("A comma-separated field specification is required", "cut")
                 sys.exit(1)
-            columnsWantedNums.append(int(columnsWanted[item]))
+            columnsWantedNums.append(int(columnsWanted[item]))  # change the string into numbers
         args.pop(0)
     else:
-        columnsWantedNums = [1]
+        columnsWantedNums = [1]     # if no -f then just have the first column as default
 
+# check for filename list #
     if len(args) < 1:
         usage("Too few Arguments", "cut")
         sys.exit(1)
-
+# sort the wanted columns numerically #
     columnsWantedNums.sort()
 
     for file in args:
         f = open(file)
         for line in f:
-            linePrint = line.split(",")
+            linePrint = line.split(",")         # split the .csv file into its sections by commas
             for column in columnsWantedNums:
                 if column > len(linePrint):
                     line = ""
                 else:
-                    line = linePrint[column-1].replace("\n", "")
+                    line = linePrint[column-1].replace("\n", "")    # print the column desired, remove any \n characters
                 print(line, end="")
-                if column == columnsWantedNums[len(columnsWantedNums)-1]:
-                    print()
+                if column == columnsWantedNums[len(columnsWantedNums)-1]: # if the column is the last desired column
+                    print()                                               # print the newline character
                 else:
-                    print(",", end="")
+                    print(",", end="")                                    # otherwise just print a comma
         f.close()
 
 
@@ -44,10 +46,12 @@ def cut(args):
 def paste(args):
     """merge lines of files"""
     fileList = []
+# open all the files and put them in a list #
     for file in args:
         f = open(file)
         fileList.append(f)
 
+# find the largest file #
     largestFileIndex = 0
     for index in range(len(fileList)):
         fileList[largestFileIndex].seek(0)
@@ -57,6 +61,7 @@ def paste(args):
         if lenFile1 < lenFile2:
             largestFileIndex = index
 
+# reset all read files to beginning #
     for file in fileList:
         file.seek(0)
 
@@ -69,7 +74,7 @@ def paste(args):
             else:
                 varEnd = ","
             line = fileList[index].readline().replace("\n", "")
-            print(line, end=varEnd)
-
+            print(line, end=varEnd)     # print the lines of each file next to each other the last file in line gets \n
+# close all the files #
     for file in fileList:
         file.close()

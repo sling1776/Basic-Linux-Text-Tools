@@ -114,33 +114,120 @@ problem into manageable components, and design strategies for implementing each
 component.  Components may be functions, modules or classes.**
 
 cat(args)
- 
+    Check for a file name -> if no then call usage
+    loop through all files
+        open file 
+        go to beginning
+        loop through lines in file
+            print line
+        close file
 
+tac(<filename list>)
+    check for a file name -> if no then call usage(tool=tac, error: to few arguments)
+    loop through all files
+        open file
+        go to beginning of file
+        loop through all lines of the file using readlines().reverse()
+            print line
+        close file
+
+head(<-n>, <int>, <filename list>)
+    if first arg = "-n"
+        check length of args > 3: if not call usage(error too few arguments)
+        check if args[1] is num: if not call usage(error provide number)
+            convert number from string
+            default =10 or number
+            remove -n and number from the list of arguments
+        loop through file name list
+            open file
+            go to the beginning
+            loop for lines to read
+                print line that is read
+             close file
+ 
+wc(<filename list>)
+    loop for all files
+        open file
+        go to beginning of file
+        loop for all characters in file
+            charactercoount +=1
+            if character == " " of "\n" then 
+                wordcount +=1
+            if character == "\n"
+                line count +=1
+        print (line, word, character, filename)
+        add totals to total
+        close file
+    print out total 
+
+tail(<-n>, <int>, <filename list>)
+    check for -n -> use same a  head
+    loop through files
+        get number of lines from file
+        loop for number desired
+            add last line to newlist
+        reverse new list
+        loop 
+            print all lines of new list
+        close files
+        
+grep(<-v><string><filelist>)
+    check for -v then remove from arguments
+    save "string" and remove from arguments
+    check for len() of arguments -> if no files ->error not enough arguments
+    loop for all files
+        for line in f.readlines()
+            if "string" in line 
+                add to yes list
+            else add to no list
+        if check -v
+            print no list
+        else print yes list
+
+sort(<filelist>)
+    loop for all files
+        open file
+        save contents into list
+    sort list alphabetically
+    print list
+    
+paste(<filelist>):
+    filelist=[]
+    fir all files in file list args
+        open file
+        append file to file list
+    find largest file
+    for lines in largest file
+        for all files
+            print line in file end="," unless it is the last in file list, then end="\n"
+    for all files 
+        close files
+
+cut(<-f> <numberstring> <file list>)
+    columns wanted = list with a 0 in it
+    check for -f
+        pop from arguments
+        split numberstring(",") = columns wanted
+    for item in columns wanted
+        if item isdigit
+            change item to int
+        else error
+        pop numberstring from args
+    for all files in file list
+        for all lines in file
+            split line by commas
+            for all desired columns
+                print desired column end=","
+        close file
 
 # 3.  Function Template
 
-**Combine the function stubs written in step #1 with pseudocode from step #2.
-Comment out the pseudocode, leaving a valid program that compiles/runs without
-errors.  At this stage your program doesn't quite work, but it also doesn't
-crash.**
+done
 
 
 # 4.  Implementation
 
-**This is the only part of the process focused on writing code in your chosen
-programming language.
-
-One by one translate passages of pseudocode into valid code.  Fill in the gaps
-in the function template.  Exploit the purpose statement and the examples.
-
-If you were thorough in the previous steps and are familiar with your
-programming system this part will go by very quickly and the code will write
-itself.
-
-When you are learning a new programming language or an unfamiliar library this
-phase can be slow and difficult.  As you gain experience with the relevant
-technologies you will spend less and less time in this phase of the process.**
-
+completed.
 
 # 5.  Testing
 
@@ -164,3 +251,67 @@ and false negatives.  Any deviation from the expected outputs are errors.
 
 The ideal is to write an automated test to avoid all manual labor beyond
 launching the test.**
+
+All tests should be done on the commandline.
+tests for each tool:
+    <toolname> no other arguments passed
+        output: usage error(too few arguments)
+    <toolname> improper file name given
+        output: program crash with python error
+
+cat tool
+    <cat> single file
+        output: print contents to screen
+    <cat> multiple files
+        output: print contents of each file to screen in order that they were given
+    
+tac tool
+    <tac> single file
+        output: print contents to screen in reverse
+    <tac> multiple files
+        output: print contents of each file in reverse to screen in order that they were given
+        
+head tool
+    <head> no number given
+        output: print first 10 lines of given file
+    <head> number given
+        output: print first *number* of lines from file
+    <head> mulitple files given with number as well
+        output: file header with first *number* of lines from file. all files printed.
+    <head> multiple files with one DNE file
+        output: print lines from each file until DNE file then give python error message and crash
+    
+tail tool
+    same tests as head. the output should give the last *number* of lines from the file
+    
+wc tool
+    <wc> multiple files
+        output: print lines, words, characters, filename to screen. totals at bottom.
+    <wc> multiple files with a DNE file
+        output: print lines words, characters, filename until DNE file and then crash and give python error
+
+grep tool
+    <grep> without string
+        output: error too few arguments
+    <grep>  <-v> 
+        output: print all lines without the string
+    <grep> with string multiple files
+        output: print all lines with the string of all files in order
+        
+sort tool
+    <sort> file list
+        sort alphabetically
+
+paste tool
+    <paste> multiple files
+        output: give each line of the file next to each other separated by commas
+                when a file runs out of lines to give then just print a blank.
+    
+cut tool
+    <cut> .csv files
+        print first lines of each file
+    <cut> .csv files with <-f>
+        print the columns wanted with the -f. these will be sorted in order.
+    
+    
+After running these tests I could find no issues with my code.

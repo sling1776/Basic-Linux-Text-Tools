@@ -19,11 +19,11 @@ def head(args):
 
     for file in args:
         f = open(file)
-        if len(args) > 1:
+        if len(args) > 1:       # if there are multiple files then add the header
             printHeader(file)
         f.seek(0)
         for line in range(linesRead):
-            print(f.readline(), end="")
+            print(f.readline(), end="")     # print the number of lines desired from the beginning
         print()
         f.close()
 
@@ -50,14 +50,14 @@ def tail(args):
         if len(args) > 1:
             printHeader(file)
         f.seek(0)
-        allLines = f.readlines()
+        allLines = f.readlines()    # save file into a list of lines
         myList = []
         for i in range(linesRead):
             if len(allLines)-1 < 0:
                 myList.append("")
             else:
-                myList.append(allLines.pop(len(allLines)-1))
-        myList.reverse()
+                myList.append(allLines.pop(len(allLines)-1))    # save the last lines of file starting with the last
+        myList.reverse()                                        # then reverse the list
         for line in myList:
             print(line, end="")
         print()
