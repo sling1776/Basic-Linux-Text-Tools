@@ -93,26 +93,6 @@ print newline, word, and byte counts for each file
 
 # 2.  Functional Examples
 
-**Design a process for obtaining the output from the input.  Consider both *good*
-and *bad* inputs.  Find or create examples of both kinds of input.
-
-Work out problem examples on paper, on a whiteboard or some other medium that
-is *not* your computer.  It is a mistake to begin writing executable code
-before you thoroughly understand what form the algorithm(s) must take.
-
-Instead, describe components of the system in *"pseudocode"*.  Expect to make
-lots of mistakes at this point.  You will find that it is much easier to throw
-away pseudocode than real code.  
-
-Manually work through several examples that illustrate the program's overall
-purpose, as well as the purpose of each component of the finished system.  You
-will converge on a correct solution much faster if you feel comfortable making
-mistakes as you go.
-
-This phase involves the use of many levels of abstraction to decompose the
-problem into manageable components, and design strategies for implementing each
-component.  Components may be functions, modules or classes.**
-
 cat(args)
     Check for a file name -> if no then call usage
     loop through all files
@@ -230,27 +210,6 @@ done
 completed.
 
 # 5.  Testing
-
-**Articulate the examples given in step #3 as tests and ensure that each
-function passes all.  Doing so discovers mistakes.  Tests also supplement
-examples in that they help others read and understand the definition when the
-need arises—and it will arise for any serious program.
-
-As bugs are discovered and fixed, devise new test cases that will detect these
-problems should they return.
-
-If you didn't come across any bugs (lucky you!) think of a possible flaw and a
-test that can be employed to screen for it.
-
-At a minimum you should create a document explaining step-by-step how a
-non-technical user may manually test your program to satisfy themselves that it
-operates correctly.  Explain the entire process starting how to launch the
-program, what inputs they should give and what results they should see at every
-step.  Provide test cases of good and bad inputs to catch both false positives
-and false negatives.  Any deviation from the expected outputs are errors.  
-
-The ideal is to write an automated test to avoid all manual labor beyond
-launching the test.**
 
 All tests should be done on the commandline.
 tests for each tool:
